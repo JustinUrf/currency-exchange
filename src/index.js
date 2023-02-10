@@ -8,7 +8,7 @@ function currencyApiCall(userNumber, currencyType, currencyExchange) {
   CurrencyApiCall.getExchangeRate(currencyType)
     .then(function(apiResponse) {
       if(apiResponse instanceof Error) {
-        const errorMessage = `There was a problem accessing the currency data from Currency Exchange API for ${currencyType} or ${currencyExchange}`;
+        const errorMessage = `There was a problem accessing the currency data from Currency Exchange API for ${apiResponse.message}`;
         throw new Error(errorMessage);
       }
       const currencyObject = apiResponse;
