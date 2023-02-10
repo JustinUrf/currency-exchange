@@ -8,21 +8,21 @@ function currencyApiCall(userNumber, currencyType, currencyExchange) {
   CurrencyApiCall.getExchangeRate(currencyType)
     .then(function(apiResponse) {
       if(apiResponse instanceof Error) {
-        const errorMessage = `There was a problem accessing the currency data from Currency Exchange API for ${currencyType} or ${currencyExchange}`
+        const errorMessage = `There was a problem accessing the currency data from Currency Exchange API for ${currencyType} or ${currencyExchange}`;
         throw new Error(errorMessage);
       }
       const currencyObject = apiResponse;
-      const exchangedCurrencyRate = currencyObject.conversion_rates[currencyExchange]
-      const result = userNumber * exchangedCurrencyRate
-      printCurrency(userNumber, currencyType, currencyExchange, result)
+      const exchangedCurrencyRate = currencyObject.conversion_rates[currencyExchange];
+      const result = userNumber * exchangedCurrencyRate;
+      printCurrency(userNumber, currencyType, result, currencyExchange);
     })
     .catch(function(error) {
       printError(error);
-    })
-  }
+    });
+}
 
 function printCurrency(userInput, currencyType, exchangedCurrency, exchangeCurrencyType) {
-  document.querySelector("#currencydata").innerText = `${userInput} ${currencyType} is ${exchangedCurrency} in ${exchangeCurrencyType}`
+  document.querySelector("#currencydata").innerText = `${userInput} ${currencyType} is ${exchangedCurrency} in ${exchangeCurrencyType}`;
 }
 
 function printError(error) {

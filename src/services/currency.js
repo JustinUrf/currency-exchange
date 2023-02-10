@@ -7,7 +7,7 @@ export default class CurrencyApiCall {
         const errorMEssage = `${response.status} ${response.statusText} ${jsonResponse.message}`;
         throw new Error(errorMEssage);
       }
-      return jsonResponse
+      return jsonResponse;
     } catch(error) {
       return error;
     }
