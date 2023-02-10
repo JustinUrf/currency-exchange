@@ -39,9 +39,11 @@ function clearResults(){
 //handles user input
 function handleUserInput(event) {
   event.preventDefault();
-  clearResults();
   const userNumber = document.querySelector("#user-input").value;
-  currencyApiCall(userNumber);
+  const userCurrencyChoice = document.getElementById("currency1-id").value;
+  const userCurrencyExchangeChoice = document.getElementById("currency2-id").value;
+  currencyApiCall(userNumber, userCurrencyChoice, userCurrencyExchangeChoice);
+  clearResults();
 }
 
 //handles on load function
