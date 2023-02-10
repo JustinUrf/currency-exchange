@@ -1,0 +1,20 @@
+html
+
+2 form inputs > one for dollar amount currency 
+
+one for type of currency (no drop down?)
+
+2 p tags with to show currency...?
+
+
+css 
+
+bootstrap
+
+javascript
+
+currency api in service.
+
+index js reads js logic.
+
+need to include read me file to get API key
