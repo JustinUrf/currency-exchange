@@ -5,15 +5,17 @@ import CurrencyApiCall from './services/currency';
 
 // Business Logic
 function currencyApiCall(userNumber, currencyType, currencyExchange) {
-  CurrencyApiCall.getExchangeRate(currencyType)
+  CurrencyApiCall.getExchangeRate()
     .then(function(apiResponse) {
       if(apiResponse instanceof Error) {
         const errorMessage = `There was a problem accessing the currency data from Currency Exchange API for ${userNumber} ${apiResponse.message}`;
         throw new Error(errorMessage);
       }
+      //Sets up USD Dollar conversion, everything coverts itself to USD before comparison...
       const currencyObject = apiResponse;
+      const userNumberToUSD = userNumber / currencyObject.conversion_rates[currencyType];
       const exchangedCurrencyRate = currencyObject.conversion_rates[currencyExchange];
-      const result = userNumber * exchangedCurrencyRate;
+      const result = userNumberToUSD * exchangedCurrencyRate;
       printCurrency(userNumber, currencyType, result, currencyExchange);
     })
     .catch(function(error) {
