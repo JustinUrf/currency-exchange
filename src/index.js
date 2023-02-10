@@ -17,6 +17,10 @@ function currencyApiCall(userNumber, currencyType, currencyExchange) {
         const badCurrency = `Currency ${currencyType} is not supported with the Currency Exchange API`
         throw new Error(badCurrency);
       }
+      if(currentObject.conversion_rates[currencyExchange] === undefined) {
+        const badCurrencyExchange = `Currency ${currencyExchange} is not supported with the Currency Exchange API`
+        throw new Error(badCurrencyExchange);
+      }
       const userNumberToUSD = userNumber / currencyObject.conversion_rates[currencyType];
       const exchangedCurrencyRate = currencyObject.conversion_rates[currencyExchange];
       const result = userNumberToUSD * exchangedCurrencyRate;
