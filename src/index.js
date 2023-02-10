@@ -13,6 +13,10 @@ function currencyApiCall(userNumber, currencyType, currencyExchange) {
       }
       //Sets up USD Dollar conversion, everything coverts itself to USD before comparison...
       const currencyObject = apiResponse;
+      if(currencyObject.conversion_rates[currencyType] === undefined) {
+        const badCurrency = `Currency ${currencyType} is not supported with the Currency Exchange API`
+        throw new Error(badCurrency);
+      }
       const userNumberToUSD = userNumber / currencyObject.conversion_rates[currencyType];
       const exchangedCurrencyRate = currencyObject.conversion_rates[currencyExchange];
       const result = userNumberToUSD * exchangedCurrencyRate;
