@@ -4,12 +4,16 @@ import './css/styles.css';
 import CurrencyApiCall from './services/currency';
 
 // Business Logic
-function getCurrencyData(){
+function printCurrency(userInput, currencyType, exchangedCurrency,exchangeCurrencyType){
+document.querySelector.innerText = `${userInput} ${currencyType} is ${exchangedCurrency} in ${exchangeCurrencyType}`
+}
 
+function printError(error) {
+  document.querySelector('#')
 }
 
 function clearResults(){
-
+  document.querySelector("#currencydata").innerText = null;
 }
 
 function handleUserInput(event) {
