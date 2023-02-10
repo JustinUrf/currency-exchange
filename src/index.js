@@ -4,7 +4,7 @@ import './css/styles.css';
 import CurrencyApiCall from './services/currency';
 
 // Business Logic
-function printCurrency(userInput, currencyType, exchangedCurrency,exchangeCurrencyType){
+function printCurrency(userInput, currencyType, exchangedCurrency, exchangeCurrencyType){
 document.querySelector.innerText = `${userInput} ${currencyType} is ${exchangedCurrency} in ${exchangeCurrencyType}`
 }
 
@@ -12,10 +12,14 @@ function printError(error) {
   document.querySelector('#')
 }
 
+//clear and resetting forms
 function clearResults(){
   document.querySelector("#currencydata").innerText = null;
+  document.getElementById("currency1-id").selectedIndex = 0;
+  document.getElementById("currency2-id").selectedIndex = 0;
 }
 
+//handles user input
 function handleUserInput(event) {
   event.preventDefault();
   clearResults();
@@ -26,6 +30,7 @@ function handleUserInput(event) {
   CurrencyApiCall();
 }
 
+//handles on load function
 window.addEventListener("load", function() {
   document.querySelector("#user-input-form").addEventListener("submit", handleUserInput);
 });
