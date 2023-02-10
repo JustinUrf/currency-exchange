@@ -9,7 +9,7 @@ function getCurrencyData(){
 }
 
 function clearResults(){
-  
+
 }
 
 function handleUserInput(event) {
@@ -18,6 +18,8 @@ function handleUserInput(event) {
   const userNumber = document.querySelector("#user-input").ariaValueMax;
   document.querySelector("user-input.value").value = null;
   getCurrencyData();
+  console.log(userNumber)
+  CurrencyApiCall();
 }
 
 window.addEventListener("load", function() {

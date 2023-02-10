@@ -14,6 +14,9 @@ bootstrap
 javascript
 
 currency api in service.
+* Need to store it in local varaible maybe?
+* Need to have checks for if user inputs a number in first line before running anything
+* Need to test a dummy currency that for error message that this currency does not exist
 
 index js reads js logic.
 
