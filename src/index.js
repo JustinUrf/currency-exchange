@@ -4,17 +4,34 @@ import './css/styles.css';
 import CurrencyApiCall from './services/currency';
 
 // Business Logic
-function printCurrency(userInput, currencyType, exchangedCurrency, exchangeCurrencyType){
-document.querySelector.innerText = `${userInput} ${currencyType} is ${exchangedCurrency} in ${exchangeCurrencyType}`
+function currencyApiCall(userNumber, currencyType, currencyExchange) {
+  CurrencyApiCall.getExchangeRate()
+    .then(function(apiResponse) {
+      if(apiResponse instanceof Error) {
+        const errorMessage = `There was a problem accessing the currency data from Currency Exchange API for ${currencyType} or ${currencyExchange}`
+        throw new Error(errorMessage);
+      }
+      const currencyObject = apiResponse;
+      console.log(currencyObject)
+      printCurrency(userNumber, currencyType, currencyExchange, 5)
+    })
+    .catch(function(error) {
+      printError(error);
+    })
+  }
+
+function printCurrency(userInput, currencyType, exchangedCurrency, exchangeCurrencyType) {
+  document.querySelector.innerText = `${userInput} ${currencyType} is ${exchangedCurrency} in ${exchangeCurrencyType}`
 }
 
 function printError(error) {
-  document.querySelector('#')
+  document.querySelector('#error').innerText = error;
 }
 
 //clear and resetting forms
 function clearResults(){
   document.querySelector("#currencydata").innerText = null;
+  document.querySelector("#error").innerText = null;
   document.getElementById("currency1-id").selectedIndex = 0;
   document.getElementById("currency2-id").selectedIndex = 0;
 }
@@ -23,11 +40,8 @@ function clearResults(){
 function handleUserInput(event) {
   event.preventDefault();
   clearResults();
-  const userNumber = document.querySelector("#user-input").ariaValueMax;
-  document.querySelector("user-input.value").value = null;
-  getCurrencyData();
-  console.log(userNumber)
-  CurrencyApiCall();
+  const userNumber = document.querySelector("#user-input").value;
+  currencyApiCall(userNumber);
 }
 
 //handles on load function
