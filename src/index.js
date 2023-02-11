@@ -4,6 +4,9 @@ import './css/styles.css';
 import CurrencyApiCall from './services/currency';
 
 // Business Logic
+
+
+//Function that handles the API calls and the errors.
 function currencyApiCall(userNumber, currencyType, currencyExchange) {
   CurrencyApiCall.getExchangeRate()
     .then(function(apiResponse) {
@@ -14,11 +17,11 @@ function currencyApiCall(userNumber, currencyType, currencyExchange) {
       //Sets up USD Dollar conversion, everything coverts itself to USD before comparison...
       const currencyObject = apiResponse;
       if(currencyObject.conversion_rates[currencyType] === undefined) {
-        const badCurrency = `Currency ${currencyType} is not supported with the Currency Exchange API`
+        const badCurrency = `Currency ${currencyType} is not supported with the Currency Exchange API`;
         throw new Error(badCurrency);
       }
-      if(currentObject.conversion_rates[currencyExchange] === undefined) {
-        const badCurrencyExchange = `Currency ${currencyExchange} is not supported with the Currency Exchange API`
+      if(currencyObject.conversion_rates[currencyExchange] === undefined) {
+        const badCurrencyExchange = `Currency ${currencyExchange} is not supported with the Currency Exchange API`;
         throw new Error(badCurrencyExchange);
       }
       const userNumberToUSD = userNumber / currencyObject.conversion_rates[currencyType];
@@ -31,10 +34,13 @@ function currencyApiCall(userNumber, currencyType, currencyExchange) {
     });
 }
 
+//Function that displays exchanged currency to DOM
 function printCurrency(userInput, currencyType, exchangedCurrency, exchangeCurrencyType) {
   document.querySelector("#currencydata").innerText = `${userInput} ${currencyType} is ${exchangedCurrency} in ${exchangeCurrencyType}`;
 }
 
+
+//Function that catches the error
 function printError(error) {
   document.querySelector('#error').innerText = error;
 }
